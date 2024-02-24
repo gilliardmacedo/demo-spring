@@ -17,7 +17,6 @@ import java.util.List;
 public class ReservaController {
   @Autowired
   ReservaService service;
-
   @Autowired
   LivroService livroService;
 
@@ -27,6 +26,10 @@ public class ReservaController {
     return new ResponseEntity<List<Reserva>>(reservas, HttpStatus.OK);
   }
 
+  @GetMapping("/all")
+  public ResponseEntity<List<Reserva>> listarTodos() {
+    return new ResponseEntity<List<Reserva>>(this.service.listarTodos(), HttpStatus.OK);
+  }
   @PostMapping
   public ResponseEntity<Reserva> criar(@PathVariable long livroId, @RequestBody Reserva reservaBody) {
     Livro livro = livroService.obter(livroId);
@@ -34,8 +37,11 @@ public class ReservaController {
         HttpStatus.NOT_FOUND,
         String.format("Livro de id %s não existe", Long.toString(livroId))
     );
-    Reserva reserva = this.service.criarReserva(new Reserva(livro, reservaBody.usuario, reservaBody.dataInicio, reservaBody.dataFim));
-
+    Reserva reserva = this.service.criarReserva(new Reserva(
+        livro,
+        reservaBody.getUsuario(),
+        reservaBody.getDataInicio(),reservaBody.getDataFim()
+    ));
     return new ResponseEntity<Reserva>(reserva, HttpStatus.CREATED);
   }
 }

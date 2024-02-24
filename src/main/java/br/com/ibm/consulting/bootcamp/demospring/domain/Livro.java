@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +29,11 @@ public class Livro {
 	private String anoPublicacao;
 
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-
-	@OneToMany(mappedBy = "livro", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "livro", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Reserva> reservas = new ArrayList<>();
+
+	private long exemplar = 0;
 	
 	public Livro() {
 		
@@ -40,6 +44,11 @@ public class Livro {
 		this.autor = autor;
 		this.titulo = titulo;
 		this.anoPublicacao = anoPublicacao;
+	}
+
+	public Livro(long id, long exemplar) {
+		this.id = id;
+		this.exemplar = exemplar;
 	}
 
 }

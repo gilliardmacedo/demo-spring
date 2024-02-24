@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ReservaRepository extends JpaRepository<Reserva, Long> {
+  void deleteByLivro_Id(long livroId);
   List<Reserva> findByLivro_Id(long livroId);
 }

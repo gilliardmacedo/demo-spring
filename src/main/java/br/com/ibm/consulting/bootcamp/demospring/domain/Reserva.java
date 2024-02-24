@@ -12,19 +12,19 @@ import lombok.Setter;
 public class Reserva {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  public long id;
+  private long id;
 
-  public String usuario;
+  private String usuario;
 
   @JsonProperty("data_inicio")
-  public String dataInicio;
+  private String dataInicio;
 
   @JsonProperty("data_fim")
-  public String dataFim;
+  private String dataFim;
 
   @ManyToOne
   @JoinColumn(name = "livroId")
-  public Livro livro;
+  private Livro livro;
 
   public Reserva() {
 

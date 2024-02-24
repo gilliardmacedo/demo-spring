@@ -19,4 +19,8 @@ public class ReservaService {
   public Reserva criarReserva(Reserva r) {
     return this.repository.saveAndFlush(r);
   }
+
+  public List<Reserva> listarTodos() {
+    return this.repository.findAll();
+  }
 }
