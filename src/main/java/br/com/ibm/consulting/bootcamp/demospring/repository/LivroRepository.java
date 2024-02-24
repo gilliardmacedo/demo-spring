@@ -8,6 +8,4 @@ import br.com.ibm.consulting.bootcamp.demospring.domain.Livro;
 @Repository
 public interface LivroRepository extends JpaRepository<Livro, Long>{
 
-	
-
 }
