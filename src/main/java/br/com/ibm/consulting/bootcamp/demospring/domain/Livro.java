@@ -2,12 +2,15 @@ package br.com.ibm.consulting.bootcamp.demospring.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@Setter
 @Entity
 @Table
 public class Livro {
@@ -22,6 +25,11 @@ public class Livro {
 
 	@JsonProperty("ano_publicacao")
 	private String anoPublicacao;
+
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
+	@OneToMany(mappedBy = "livro", fetch = FetchType.LAZY)
+	private List<Reserva> reservas = new ArrayList<>();
 	
 	public Livro() {
 		
@@ -31,38 +39,6 @@ public class Livro {
 		this.id = id;
 		this.autor = autor;
 		this.titulo = titulo;
-		this.anoPublicacao = anoPublicacao;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getAutor() {
-		return autor;
-	}
-
-	public void setAutor(String autor) {
-		this.autor = autor;
-	}
-
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
-	public String getAnoPublicacao() {
-		return anoPublicacao;
-	}
-
-	public void setAnoPublicacao(String anoPublicacao) {
 		this.anoPublicacao = anoPublicacao;
 	}
 
