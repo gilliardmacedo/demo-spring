@@ -3,6 +3,8 @@ package br.com.ibm.consulting.bootcamp.demospring.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import br.com.ibm.consulting.bootcamp.demospring.domain.Livro;
@@ -18,8 +20,10 @@ public class LivroService {
 		return repository.saveAndFlush(l);
 	}
 	
-	public List<Livro> listar() {
-		return repository.findAll();
+	public Page<Livro> listar(Integer pagina, Integer porPagina) {
+		if (pagina == null) pagina = 0;
+		if (porPagina == null) porPagina = 15;
+		return repository.findAll(PageRequest.of(pagina, porPagina));
 	}
 	
 	public Livro obter(long id) {

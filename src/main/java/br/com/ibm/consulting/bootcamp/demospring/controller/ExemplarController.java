@@ -21,7 +21,7 @@ public class ExemplarController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public ResponseEntity<Livro> incrementarCopia(@RequestBody Exemplar exemplar, @PathVariable long livroId) {
+  public ResponseEntity<Livro> incrementarExemplar(@RequestBody Exemplar exemplar, @PathVariable long livroId) {
     var livro = livroService.obter(livroId);
     if (livro == null) return new ResponseEntity<Livro>(livro, HttpStatus.NOT_FOUND);
     var alterado = service.incrementarQuantidade(livro, exemplar.getQuantidade(), livro.getExemplar());
@@ -30,7 +30,7 @@ public class ExemplarController {
 
   @DeleteMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public ResponseEntity<Livro> diminuirCopia(@RequestBody Exemplar exemplar, @PathVariable long livroId) {
+  public ResponseEntity<Livro> diminuirExemplar(@RequestBody Exemplar exemplar, @PathVariable long livroId) {
     var livro = livroService.obter(livroId);
     if (livro == null) return new ResponseEntity<Livro>(livro, HttpStatus.NOT_FOUND);
     if (livro.getExemplar() < exemplar.getQuantidade()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Essa quantia é maior do que a quantidade de exemplares disponíveis");
