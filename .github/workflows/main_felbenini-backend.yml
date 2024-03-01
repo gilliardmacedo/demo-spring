@@ -22,7 +22,7 @@ jobs:
         with:
           azure-subscription: ${{ env.AZURE_SUBSCRIPTION }}
           action: deploy
-          service-name: 'java-felbenini-back (B1: 1)'
+          service-name: felbenini_backend
           app-name: felbenini_backend
           use-staging-deployment: false
           package: ${{ env.ASC_PACKAGE_PATH }}
