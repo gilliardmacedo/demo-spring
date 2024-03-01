@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/livros/{livroId}/exemplares")
 public class ExemplarController {

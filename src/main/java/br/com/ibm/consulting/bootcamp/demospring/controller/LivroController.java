@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import br.com.ibm.consulting.bootcamp.demospring.domain.Livro;
 import br.com.ibm.consulting.bootcamp.demospring.service.LivroService;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/livros")
 public class LivroController {
